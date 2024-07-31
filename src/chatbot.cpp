@@ -44,6 +44,50 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+///
+// Task 2
+ChatBot::ChatBot(const ChatBot &source){ // copy constructor
+
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    _image = new wxBitmap(*source._image);
+    std::cout << "Copy Constructor"<< std::endl;
+}
+ChatBot& ChatBot::operator=(const ChatBot& source) { // copy assig
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    _image = new wxBitmap(*source._image);
+    std::cout << "Copy Assignment Operator" << std::endl;
+    return *this;
+}
+ChatBot::ChatBot(ChatBot &&source){// move constructor
+
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+}
+ChatBot & ChatBot::operator=(ChatBot &&source) { // move assignment operator
+    if (this == &source)
+        return *this;
+    _image = source._image;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _currentNode=source._currentNode;
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    std::cout << "Move assignment Operator "<< std::endl;
+    return *this;
+}
+
 
 ////
 //// EOF STUDENT CODE
